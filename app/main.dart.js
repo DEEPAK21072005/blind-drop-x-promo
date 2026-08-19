@@ -94852,7 +94852,7 @@ s=n.ga3i()?7:9
 break
 case 7:k=t.N
 s=10
-return A.p(A.aRM(A.em("https://ntfy.sh/"+("bdx_"+B.e.dF(n.b).toLowerCase()),0,null),B.bl.Eq(a,null),A.ad(["Content-Type","application/json","Filename","payload.json"],k,k)).nV(B.IU),$async$fB)
+return A.p(A.aRM(A.em("https://ntfy.sh/"+("bdx_"+B.e.dF(n.b).toLowerCase()),0,null),B.bl.Eq(a,null),A.ad(["Content-Type","application/json"],k,k)).nV(B.IU),$async$fB)
 case 10:s=8
 break
 case 9:if(!n.y||n.w==null){A.fF().$1("[WS] Cannot send \u2014 not connected")
