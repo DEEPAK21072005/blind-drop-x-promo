@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blind Drop X v2.0.0 — Zero-Knowledge Ephemeral Communication</title>
+  <meta name="description" content="Blind Drop X v2.0.0 — The ultimate zero-knowledge ephemeral messaging app. No logs, anti-screenshot protection (Android FLAG_SECURE + web blackout), view-once media, listen-once voice, and self-destructing rooms.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Animated Starry Sky Canvas -->
+  <canvas id="starfield"></canvas>
+
+  <!-- Ambient Glow -->
+  <div class="ambient-glow"></div>
+
+  <!-- Header / Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="moon-icon">🌙</span>
+        <span class="logo-text">BLIND DROP X</span>
+      </div>
+      <div class="nav-actions">
+        <div class="dj-badge">
+          <span class="bolt">⚡</span> POWERED BY DJ
+        </div>
+        <a href="#platforms" class="nav-btn">GET THE APP</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Hero Section -->
+  <main class="hero">
+    <div class="hero-container">
+
+      <!-- Badge -->
+      <div class="hero-badge">
+        <span class="pulse-dot"></span> ZERO-KNOWLEDGE RAM-ONLY ARCHITECTURE · v2.0.0
+      </div>
+
+      <!-- Hero Heading -->
+      <h1 class="hero-title">
+        THE APEX OF <span class="gradient-text">EPHEMERAL</span> PRIVACY
+      </h1>
+
+      <p class="hero-desc">
+        No databases. No chat history. No screenshots. Voice messages that play once, media that vanishes, and rooms that self-destruct into thin air.
+      </p>
+
+      <!-- Quick Action Buttons -->
+      <div class="cta-group">
+        <a href="https://blind-drop-x.vercel.app" target="_blank" class="btn btn-primary">
+          <span class="btn-icon">🚀</span>
+          <div class="btn-content">
+            <span class="btn-sub">Instant Access</span>
+            <span class="btn-main">LAUNCH WEB APP</span>
+          </div>
+        </a>
+
+        <a href="#platforms" class="btn btn-secondary">
+          <span class="btn-icon">📥</span>
+          <div class="btn-content">
+            <span class="btn-sub">Android Package</span>
+            <span class="btn-main">DOWNLOAD APK</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Core Security Specs Grid -->
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="card-icon">📵</div>
+          <h3 class="card-title">Anti-Screenshot Shield</h3>
+          <p class="card-desc">Android: native <code>FLAG_SECURE</code> at OS level blocks all capture tools. Web: JS blackout shield triggers on <code>blur</code>, <code>PrintScreen</code>, <code>Win+Shift+S</code>, <code>visibilitychange</code>, and <code>beforeprint</code>. 3-finger gesture also activates blackout.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="card-icon">🎙️</div>
+          <h3 class="card-title">Voice: Listen-Once</h3>
+          <p class="card-desc">Record & send encrypted audio notes in-app. Senders can replay freely at any time. Receivers hear it once — after playback completes, the audio bytes are immediately nulled from RAM and destroyed.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="card-icon">👁️</div>
+          <h3 class="card-title">View-Once Image Sharing</h3>
+          <p class="card-desc">Client-side JPEG compression to 1280px / quality 78 for instant delivery. Images are pre-optimised before leaving your device. Once the recipient closes the viewer, bytes are wiped directly from RAM — zero cloud storage.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="card-icon">⏳</div>
+          <h3 class="card-title">Volatile Self-Destruct</h3>
+          <p class="card-desc">Rooms run on 1–60 minute auto-destruct timers set by the host. When the countdown hits zero, all sessions, messages, media bytes, and encryption keys are permanently purged. A background server sweep runs every 60 s to enforce expiry.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="card-icon">🔒</div>
+          <h3 class="card-title">XOR + SHA-256 Cipher</h3>
+          <p class="card-desc">Client-side zero-knowledge encryption where the room password serves as the shared stretched secret key.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="card-icon">👻</div>
+          <h3 class="card-title">Anonymous Codenames</h3>
+          <p class="card-desc">No accounts, phone numbers, or emails. Participants are assigned volatile identifiers like <code>GHOST-7A</code> or <code>LUNAR-42F</code>.</p>
+        </div>
+
+      </div>
+
+      <!-- Platforms & Download Section -->
+      <section id="platforms" class="platforms-section">
+        <div class="preview-header">
+          <span class="preview-tag">PLATFORM INSTALLATION</span>
+          <h2>DOWNLOAD & INSTALL</h2>
+          <p>Download the official Android release APK or run instantly in any browser.</p>
+        </div>
+
+        <div class="platforms-grid">
+
+          <!-- Android Card -->
+          <div class="platform-card">
+            <div class="platform-header">
+              <span class="platform-icon">🤖</span>
+              <div class="platform-info">
+                <h3>Android Release APK</h3>
+                <span class="platform-badge">v2.0.0 · Full Native Binary · 60 MB</span>
+              </div>
+            </div>
+            <p class="platform-desc">
+              Direct official package build with native FLAG_SECURE screenshot prevention, microphone permission, and gallery integration.
+            </p>
+            <div class="platform-actions">
+              <a href="downloads/BlindDropX-v2.0.0.apk" download="BlindDropX-v2.0.0.apk" class="btn btn-primary btn-full" id="downloadApkBtn">
+                <span class="btn-icon">📥</span>
+                <div class="btn-content">
+                  <span class="btn-sub">Direct Download · v2.0.0</span>
+                  <span class="btn-main">DOWNLOAD APK (60 MB)</span>
+                </div>
+              </a>
+              <a href="https://blind-drop-x.vercel.app" target="_blank" class="btn btn-secondary btn-full">
+                <span class="btn-icon">🌐</span>
+                <div class="btn-content">
+                  <span class="btn-sub">Direct Launch</span>
+                  <span class="btn-main">OPEN IN BROWSER</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- iOS Card -->
+          <div class="platform-card">
+            <div class="platform-header">
+              <span class="platform-icon">🍏</span>
+              <div class="platform-info">
+                <h3>iOS / iPhone / iPad</h3>
+                <span class="platform-badge">Safari PWA · Zero Telemetry</span>
+              </div>
+            </div>
+            <p class="platform-desc">
+              No Apple telemetry or App Store logs. Add directly to your iOS Home Screen from Safari in 3 seconds.
+            </p>
+            <div class="platform-actions">
+              <button id="iosInstallBtn" class="btn btn-primary btn-full">
+                <span class="btn-icon">📱</span>
+                <div class="btn-content">
+                  <span class="btn-sub">Add to Home Screen</span>
+                  <span class="btn-main">INSTALL ON IOS</span>
+                </div>
+              </button>
+              <a href="https://blind-drop-x.vercel.app" target="_blank" class="btn btn-secondary btn-full">
+                <span class="btn-icon">🚀</span>
+                <div class="btn-content">
+                  <span class="btn-sub">Direct Launch</span>
+                  <span class="btn-main">LAUNCH ON SAFARI</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Desktop / Web Card -->
+          <div class="platform-card">
+            <div class="platform-header">
+              <span class="platform-icon">💻</span>
+              <div class="platform-info">
+                <h3>Desktop & Web</h3>
+                <span class="platform-badge">Chrome · Edge · Safari</span>
+              </div>
+            </div>
+            <p class="platform-desc">
+              Blackout shield fires on <code>Win+Shift+S</code>, <code>PrintScreen</code>, tab blur, devtools open, and <code>beforeprint</code>. Global <code>user-select: none</code> CSS prevents copy. Works on Chrome, Edge, Safari, Firefox.
+            </p>
+            <div class="platform-actions">
+              <a href="https://blind-drop-x.vercel.app" target="_blank" class="btn btn-primary btn-full">
+                <span class="btn-icon">⚡</span>
+                <div class="btn-content">
+                  <span class="btn-sub">Production Web</span>
+                  <span class="btn-main">OPEN WEB APP</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- What's New in v2.0.0 -->
+      <section class="changelog-section">
+        <div class="preview-header">
+          <span class="preview-tag">RELEASE NOTES</span>
+          <h2>WHAT'S NEW IN v2.0.0</h2>
+          <p>The most secure ephemeral messaging release yet — zero-server storage, multi-layer screenshot protection.</p>
+        </div>
+        <div class="changelog-grid">
+          <div class="changelog-item">
+            <span class="changelog-tag new">NEW</span>
+            <span class="changelog-text">Multi-layer web screenshot blackout — blur, PrintScreen, visibilitychange, beforeprint all intercepted</span>
+          </div>
+          <div class="changelog-item">
+            <span class="changelog-tag new">NEW</span>
+            <span class="changelog-text">3-finger gesture detection on Android triggers instant blackout before OEM screenshot service captures</span>
+          </div>
+          <div class="changelog-item">
+            <span class="changelog-tag new">NEW</span>
+            <span class="changelog-text">Client-side image optimisation — 10 MB photo compressed to ~150 KB for instant 0.1 s delivery</span>
+          </div>
+          <div class="changelog-item">
+            <span class="changelog-tag improved">IMPROVED</span>
+            <span class="changelog-text">WebSocket auto-reconnect: 6 attempts with exponential back-off (2 s, 4 s… 12 s)</span>
+          </div>
+          <div class="changelog-item">
+            <span class="changelog-tag improved">IMPROVED</span>
+            <span class="changelog-text">FLAG_SECURE now applied in onCreate, onResume, onAttachedToWindow & onWindowFocusChanged</span>
+          </div>
+          <div class="changelog-item">
+            <span class="changelog-tag improved">IMPROVED</span>
+            <span class="changelog-text">Server-side background cleanup loop purges expired rooms & notifies all connected WS clients</span>
+          </div>
+          <div class="changelog-item">
+            <span class="changelog-tag fix">FIX</span>
+            <span class="changelog-text">Listen-once audio bytes now purged immediately after playback completes, not on next tick</span>
+          </div>
+          <div class="changelog-item">
+            <span class="changelog-tag fix">FIX</span>
+            <span class="changelog-text">View-once images correctly blocked after receiver closes viewer — sender thumbnail always visible</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- App Interface Preview Showcase -->
+      <div class="preview-section">
+        <div class="preview-header">
+          <span class="preview-tag">SYSTEM INTERFACE</span>
+          <h2>DESIGNED FOR THE SHADOWS</h2>
+          <p>Deep-black aesthetic with dynamic moon phases, breathing starfield, and high-contrast typography.</p>
+        </div>
+
+        <div class="mockup-frame">
+          <div class="mockup-top-bar">
+            <div class="mockup-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="mockup-url">BLIND DROP X // ENCRYPTED SESSION</div>
+            <div class="mockup-badge">ONLINE</div>
+          </div>
+          <div class="mockup-screen">
+            <div class="mockup-appbar">
+              <div class="room-indicator">
+                <span class="room-title">ROOM 7K8B291A</span>
+                <span class="room-sub">GHOST-9B (HOST)</span>
+              </div>
+              <div class="room-status">
+                <span class="status-dot"></span> 2 USERS ACTIVE
+              </div>
+            </div>
+
+            <div class="mockup-timer-bar">
+              <span>⏱️ AUTO-DESTRUCT IN</span>
+              <span class="timer-digits">04:32</span>
+            </div>
+
+            <div class="mockup-chat">
+              <div class="chat-bubble bubble-them">
+                <span class="bubble-sender">RAVEN-42X</span>
+                <div class="bubble-body">🔒 Voice message · 8s <span class="badge-amber">LISTEN ONCE</span></div>
+              </div>
+
+              <div class="chat-bubble bubble-me">
+                <span class="bubble-sender">YOU</span>
+                <div class="bubble-body">Payload received. Media verified and expunged.</div>
+              </div>
+
+              <div class="chat-bubble bubble-them">
+                <span class="bubble-sender">RAVEN-42X</span>
+                <div class="bubble-body">👁️ image_confidential.png <span class="badge-amber">VIEW ONCE</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- iOS Installation Modal -->
+  <div id="iosModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>🍏 Install Blind Drop X on iPhone/iPad</h3>
+        <button class="modal-close" id="closeIosModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>iOS doesn't require any app store download. You can install it directly to your home screen:</p>
+        <ol class="steps-list">
+          <li>Open Safari on your iPhone or iPad.</li>
+          <li>Navigate to: <code>https://blind-drop-x.vercel.app</code></li>
+          <li>Tap the <strong>Share</strong> button (box with an arrow pointing up) at the bottom.</li>
+          <li>Scroll down and tap <strong>"Add to Home Screen"</strong>.</li>
+          <li>Launch the app from your home screen for full-screen immersive mode with hardware security!</li>
+        </ol>
+        <a href="https://blind-drop-x.vercel.app" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 16px;">
+          OPEN & INSTALL ON SAFARI NOW
+        </a>
+      </div>
+    </div>
+  </div>
+
+      <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="logo">
+          <span class="moon-icon">🌙</span>
+          <span class="logo-text">BLIND DROP X</span>
+        </div>
+        <p>Zero-Knowledge Ephemeral Communication System</p>
+      </div>
+
+      <div class="dj-signature">
+        <div class="dj-card">
+          <span class="dj-title">ENGINEERED & ARCHITECTED BY</span>
+          <span class="dj-name">⚡ POWERED BY DJ</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Blind Drop X. Strictly Confidential & Ephemeral. All RAM state is wiped upon termination.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
