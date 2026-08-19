@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <base href="/app/">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blind Drop X – Zero-Knowledge Ephemeral Messaging. No logs, no screenshots, no traces.">
+  <meta name="theme-color" content="#000000">
+  <title>Blind Drop X</title>
+
+  <style>
+    /* ── Global screenshot/copy prevention ─────────────────────────────── */
+    * {
+      -webkit-user-select: none !important;
+      -moz-user-select:    none !important;
+      -ms-user-select:     none !important;
+      user-select:         none !important;
+      -webkit-touch-callout: none !important;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #000000;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* Disable image dragging */
+    img, canvas {
+      -webkit-user-drag: none !important;
+      user-drag: none !important;
+      pointer-events: none;
+    }
+
+    /* Re-enable pointer events on the Flutter canvas so the app is interactive */
+    flt-glass-pane,
+    flt-glass-pane * {
+      pointer-events: auto !important;
+    }
+
+    /* ── Anti-Screenshot Blackout Shield (activates on Win+Shift+S / Blur / Snipping) ── */
+    #security-shield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000000;
+      z-index: 2147483647;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    body.blurred #security-shield,
+    body.screenshot-active #security-shield {
+      display: flex !important;
+    }
+
+    body.blurred flt-glass-pane,
+    body.screenshot-active flt-glass-pane,
+    body.blurred canvas,
+    body.screenshot-active canvas {
+      filter: blur(50px) invert(1) brightness(0) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+
+    .shield-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .shield-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+
+    .shield-subtitle {
+      font-size: 12px;
+      color: #8892A4;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+
+<body oncontextmenu="return false;">
+
+  <!-- Anti-Screenshot Blackout Shield -->
+  <div id="security-shield">
+    <div class="shield-badge">🔒 ZERO-KNOWLEDGE SCREEN GUARD</div>
+    <div class="shield-title">PROTECTED EPHEMERAL CONTENT</div>
+    <div class="shield-subtitle">Screenshots, recordings, and snipping tools are strictly blocked by Blind Drop X.</div>
+    <div style="margin-top: 24px; font-size: 10px; color: #555; letter-spacing: 3px;">POWERED BY DJ</div>
+  </div>
+
+  <script src="flutter.js" defer></script>
+
+  <script>
+    // ── Flutter loader ────────────────────────────────────────────────
+    window.addEventListener('load', function () {
+      _flutter.loader.loadEntrypoint({
+        onEntrypointLoaded: function (engineInitializer) {
+          engineInitializer.initializeEngine().then(function (appRunner) {
+            appRunner.runApp();
+          });
+        }
+      });
+    });
+
+    // ── Ultra-Strict Anti-Screenshot & Screen Capture Deterrence ──────────
+
+    let _blurTimer = null;
+
+    function triggerBlackout() {
+      document.body.classList.add('blurred');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText('').catch(function () {});
+      }
+    }
+
+    function triggerBlackoutDebounced(delayMs) {
+      clearTimeout(_blurTimer);
+      _blurTimer = setTimeout(triggerBlackout, delayMs || 0);
+    }
+
+    function clearBlackout() {
+      clearTimeout(_blurTimer);
+      document.body.classList.remove('blurred');
+      document.body.classList.remove('screenshot-active');
+    }
+
+    // 1. Blackout when window loses focus — debounced 300ms to avoid flicker on rapid alt-tab
+    window.addEventListener('blur', function () { triggerBlackoutDebounced(300); });
+    window.addEventListener('focus', clearBlackout);
+
+    // 2. Blackout on visibility change
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') {
+        triggerBlackout();
+      } else {
+        clearBlackout();
+      }
+    });
+
+    // 3. Detect PrintScreen / Shift+S / Windows snipping keys
+    window.addEventListener('keydown', function (e) {
+      // PrintScreen key
+      if (e.key === 'PrintScreen' || e.code === 'PrintScreen') {
+        triggerBlackout();
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+
+      // Windows/Meta key + Shift + S  (Win+Shift+S snipping)
+      if ((e.metaKey || e.shiftKey) && e.shiftKey && (e.key === 's' || e.key === 'S' || e.code === 'KeyS') && (e.metaKey || e.ctrlKey)) {
+        triggerBlackout();
+        setTimeout(clearBlackout, 1500);
+      }
+
+      // Block Ctrl/Cmd + S, P, U
+      if ((e.ctrlKey || e.metaKey) && (
+        e.key === 's' || e.key === 'S' ||
+        e.key === 'p' || e.key === 'P' ||
+        e.key === 'u' || e.key === 'U' ||
+        e.key === 'c' || e.key === 'C'
+      )) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+
+      // Block F12 / DevTools
+      if (e.key === 'F12' || ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J'))) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+    }, true);
+
+    window.addEventListener('keyup', function (e) {
+      if (e.key === 'PrintScreen' || e.code === 'PrintScreen') {
+        triggerBlackout();
+        setTimeout(clearBlackout, 1000);
+      }
+    });
+
+    // 4. Before Print interception
+    window.addEventListener('beforeprint', function () {
+      triggerBlackout();
+    });
+    window.addEventListener('afterprint', clearBlackout);
+
+    // 5. Prevent Drag and Copy/Cut
+    document.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    document.addEventListener('copy', function (e) { e.preventDefault(); });
+    document.addEventListener('cut', function (e) { e.preventDefault(); });
+  </script>
+
+</body>
+</html>
