@@ -1,0 +1,37 @@
+{
+    "name": "Blind Drop X",
+    "short_name": "BlindDropX",
+    "start_url": ".",
+    "display": "standalone",
+    "display_override": ["standalone", "minimal-ui"],
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "description": "Zero-Knowledge Ephemeral Communication System v2.0.0. No logs, no screenshots, no traces. Powered by DJ.",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "categories": ["utilities", "productivity"],
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}
